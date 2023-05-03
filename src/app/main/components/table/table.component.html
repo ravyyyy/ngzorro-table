@@ -22,8 +22,8 @@
                 <td>{{ data.author }}</td>
                 <td>{{ data.genre | uppercase}}</td>
                 <td>
-                    <span nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)"></span>
-                    <span nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)"></span>
+                    <span class="delete-button" nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)" title="Delete book"></span>
+                    <span class="edit-button" nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)" title="Edit book"></span>
                 </td>
             </tr>
         </tbody>
