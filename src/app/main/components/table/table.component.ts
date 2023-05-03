@@ -36,7 +36,11 @@ export class TableComponent implements OnInit{
   }
 
   delete(book: Book) {
-    this.booksService.deleteBook(book);
+    const index = this.booksList.indexOf(book);
+    if (index !== -1) {
+      this.booksList.splice(index, 1);
+      this.booksService.booksListSubject.next(this.booksList);
+    }
   }
 
   edit(book: Book) {
