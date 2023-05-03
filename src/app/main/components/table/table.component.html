@@ -67,4 +67,31 @@
             </form>
         </ng-container>
     </nz-modal>
+
+    <nz-modal [(nzVisible)]="isEditModalVisible" nzTitle="Edit book" (nzOnOk)="handleEditOk()" (nzOnCancel)="handleEditCancel()">
+        <ng-container *nzModalContent>
+          <form nz-form [formGroup]="editBookForm">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the title!">
+                <input type="text" nz-input formControlName="title" id="title" placeholder="Title">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the year!">
+                <input type="number" nz-input formControlName="year" id="year" placeholder="Year">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the author!">
+                <input type="text" nz-input formControlName="author" id="author" placeholder="Author">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the genre!">
+                <input type="text" nz-input formControlName="genre" id="genre" placeholder="Genre">
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </ng-container>
+      </nz-modal>
 </div>
