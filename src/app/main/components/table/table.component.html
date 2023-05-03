@@ -17,11 +17,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of basicTable.data">
-                <!-- PIPE -->
                 <td nzLeft>{{ data.title}}</td>
                 <td>{{ data.year }}</td>
                 <td>{{ data.author }}</td>
-                <td>{{ data.genre }}</td>
+                <td>{{ data.genre | uppercase}}</td>
                 <td>
                     <span nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)"></span>
                     <span nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)"></span>
