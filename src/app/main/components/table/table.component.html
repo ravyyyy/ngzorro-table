@@ -1,0 +1,31 @@
+<div class="table-container">
+    <div class="table-operations">
+        <button nz-button (click)="add()">
+            Add
+        </button>
+    </div>
+
+    <nz-table #basicTable [nzData]="booksList" [nzPageSize]="8">
+        <thead>
+            <tr>
+                <th nzLeft>Title</th>
+                <th>Year</th>
+                <th>Author</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <!-- PIPE -->
+                <td nzLeft>{{ data.title}}</td>
+                <td>{{ data.year }}</td>
+                <td>{{ data.author }}</td>
+                <td>{{ data.genre }}</td>
+                <td>
+                    <span nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)"></span>
+                    <span nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)"></span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
