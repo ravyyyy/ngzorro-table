@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../../interfaces/book.interface';
 import { BooksService } from '../../services/books.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Form, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -10,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TableComponent implements OnInit{
   booksList!: Book[];
+  isModalVisible: boolean = false;
+  bookForm!: FormGroup;
 
   constructor(
     private booksService: BooksService,
@@ -28,11 +31,21 @@ export class TableComponent implements OnInit{
 
   ngOnInit(): void {
       this.booksList = this.booksService.books;
+      this.initializeForm();
       console.log(this.booksList);
   }
 
+  initializeForm(): void {
+    this.bookForm = new FormGroup({
+      title: new FormControl(null, [Validators.required]),
+      year: new FormControl(null, [Validators.required]),
+      author: new FormControl(null, [Validators.required]),
+      genre: new FormControl(null, [Validators.required])
+    });
+  }
+
   add() {
-    this.booksService.addBook();
+    this.showModal();
   }
 
   delete(book: Book) {
@@ -51,5 +64,43 @@ export class TableComponent implements OnInit{
       },
       queryParamsHandling: 'merge'
     })
+  }
+
+  handleOk(): void {
+    const newBook: Book = {
+      title: this.title.value,
+      year: this.year.value,
+      author: this.author.value,
+      genre: this.genre.value
+    };
+
+    this.booksList.push(newBook);
+    this.booksService.booksListSubject.next(this.booksList);
+
+    this.isModalVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isModalVisible = false;
+  }
+
+  showModal(): void {
+    this.isModalVisible = true;
+  }
+
+  get title(): FormControl {
+    return this.bookForm.get('title') as FormControl;
+  }
+
+  get year(): FormControl {
+    return this.bookForm.get('year') as FormControl;
+  }
+
+  get author(): FormControl {
+    return this.bookForm.get('author') as FormControl;
+  }
+
+  get genre(): FormControl {
+    return this.bookForm.get('genre') as FormControl;
   }
 }

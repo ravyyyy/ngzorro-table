@@ -28,4 +28,43 @@
             </tr>
         </tbody>
     </nz-table>
+
+    <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Add new book" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+        <ng-container *nzModalContent>
+            <form nz-form [formGroup]="bookForm">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please add the title!">
+                        <input type="text" nz-input formControlName="title" id="title" placeholder="Title">
+                        <div class="red-text" *ngIf="title?.errors?.['required']">
+                            Title is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="number" nz-input formControlName="year" id="year" placeholder="Year">
+                        <div class="red-text" *ngIf="year?.errors?.['required']">
+                            Year is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="author" id="author" placeholder="Author">
+                        <div class="red-text" *ngIf="author?.errors?.['required']">
+                            Author is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="genre" id="genre" placeholder="Genre">
+                        <div class="red-text" *ngIf="genre?.errors?.['required']">
+                            Genre is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </ng-container>
+    </nz-modal>
 </div>
